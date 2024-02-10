@@ -1,0 +1,28 @@
+[
+    {
+        "tripName": "Tokyo Summer 2023",
+        "currency": "JPY",
+        "categories": [
+            {
+                "catName": "Food",
+                "purchases": [
+                    {
+                        "purName": "Sushi",
+                        "purDesc": "Kura Sushi Dinner 11/9",
+                        "price": 3000
+                    },
+                    {
+                        "purName": "Beef Bowl",
+                        "purDesc": "Sukiya Lunch 11/10",
+                        "price": 900
+                    },
+                    {
+                        "purName": "Kebab",
+                        "purDesc": "Harajuku Street Kebab Dinner 11/10",
+                        "price": 1000
+                    }
+                ]
+            }
+        ]
+    }
+]

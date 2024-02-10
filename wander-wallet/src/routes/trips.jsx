@@ -9,8 +9,9 @@ const Trips = () => {
                 </article>
 
 
-                <button className="btn btn-secondary mx-10" onClick={()=>document.getElementById('my_modal_1').showModal()}>Add Trip</button>
-                <dialog id="my_modal_1" className="modal">
+                <button className="btn btn-secondary mx-10" onClick={()=>document.getElementById('addTripModal').showModal()}>Add Trip</button>
+
+                <dialog id="addTripModal" className="modal">
                     <div className="modal-box">
                         <h3 className="font-bold text-lg">Enter Trip Info</h3>
 
@@ -45,21 +46,25 @@ const Trips = () => {
                         <div className="modal-action">
                             <form method="dialog">
                                 {/* if there is a button in form, it will close the modal */}
-                                <button className="btn">Close</button>
+                                <button className="btn mx-8 btn">Close</button>
+                                
+                                <button className="btn btn-secondary">Confirm</button>
                             </form>
                         </div>
                     </div>
                 </dialog>
 
 
-                <dialog id="my_modal_2" className="modal">
+                <dialog id="deleteTripModal" className="modal">
                     <div className="modal-box">
                         <h3 className="font-bold text-lg py-7">Are you sure you want to delete this trip?</h3>
                         <p>This action cannot be undone!</p>
                         <div className="modal-action">
                             <form method="dialog">
                                 {/* if there is a button in form, it will close the modal */}
-                                <button className="btn" >Close</button>
+                                <button className="btn mx-8 btn">Close</button>
+                                
+                                <button className="btn btn-secondary">Delete</button>
                             </form>
                         </div>
                     </div>
@@ -73,18 +78,20 @@ const Trips = () => {
                 <TripCard i = {"2"} name = {"Barcelona Winter 2021"} currency = {"EUR"}/>
                 <TripCard i = {"3"} name = {"New York City Summer 2022"} currency = {"USD"}/>
             </ul>
-            <button className="btn btn-circle btn-secondary text-2xl fixed bottom-10 right-10" onClick={()=>document.getElementById('popup_1').classList.remove("hidden")}>
+
+            <button className="btn btn-circle btn-secondary text-2xl fixed bottom-10 right-10" onClick={()=>document.getElementById('tripsHelp').classList.remove("hidden")}>
                 <p>?</p>
             </button>
 
-            <div id="popup_1" className="card w-96 bg-base-100 shadow-xl fixed bottom-25 right-10 hidden">
+            <div id="tripsHelp" className="card w-96 bg-base-100 shadow-xl fixed bottom-10 right-10 hidden">
                 <div className="card-body">
                     <div className="card-actions justify-end">
-                        <button className="btn btn-square btn-sm" onClick={()=>document.getElementById('popup_1').classList.add("hidden")}>
+                        <button className="btn btn-square btn-sm" onClick={()=>document.getElementById('tripsHelp').classList.add("hidden")}>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
                         </button>
                     </div>
-                    <p>This page shows all of your stored trips! Click "Add Trip" to add a new trip, click on any trip card to see that trip's details, or click the "X" button to delete a trip.</p>
+                    <p>This page shows all of your stored trips! Click "Add Trip" to add a new trip, 
+                        click on any trip card to see that trip's details, or click the "X" button to delete a trip.</p>
                 </div>
             </div>
         </>
