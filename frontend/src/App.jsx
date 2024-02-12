@@ -10,7 +10,7 @@ const App = () => {
       <Routes>
         <Route path = "/" element = {<Layout />}>
           <Route index element = {<Trips/>} />
-          <Route path = ":tripnum" element = {<TripInfo/>} />
+          <Route path = ":tripNum" element = {<TripInfo/>} />
         </Route>
       </Routes>
     </BrowserRouter>

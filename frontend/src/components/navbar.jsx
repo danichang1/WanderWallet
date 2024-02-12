@@ -9,7 +9,7 @@ const Navbar = () => {
             <div className="flex-none px-5">
                 <Link to="/">
                     <button className="btn btn-ghost">
-                        <a>My Trips</a>
+                        <p>My Trips</p>
                     </button>
                 </Link>
             </div>

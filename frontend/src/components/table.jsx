@@ -1,6 +1,20 @@
+import { useState } from "react";
 import TableElement from "./tableelement";
+import axios from "axios";
 
-const Table = ({currency}) => {
+const Table = ({currency, purchases, tripNum, catNum}) => {
+
+    const handlePurDelete = (index) => {
+        axios.delete("/deletePurchase", {
+            params: {
+                tripNum: tripNum,
+                catNum: catNum,
+                purNum: index
+            }
+        })
+        window.location.reload()
+    }
+
     return (
         <div className="overflow-x-auto">
             <table className="table">
@@ -14,26 +28,18 @@ const Table = ({currency}) => {
                 </tr>
                 </thead>
                 <tbody>
-                {/* row 1 */}
-                <TableElement name = "Sushi" desc = "Kura Sushi Dinner 11/9" price = "3000"/>
-                {/* row 2 */}
-                <tr>
-                    <button className="btn btn-square btn-xs mt-2.5 ml-2" onClick={()=>document.getElementById('deletePurchaseModal').showModal()}>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                    </button>
-                    <td>Beef Bowl</td>
-                    <td>Sukiya Lunch 11/10</td>
-                    <td>900</td>
-                </tr>
-                {/* row 3 */}
-                <tr>
-                    <button className="btn btn-square btn-xs mt-2.5 ml-2" onClick={()=>document.getElementById('deletePurchaseModal').showModal()}>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                    </button>
-                    <td>Kebab</td>
-                    <td>Harajuku street kebab dinner 11/10</td>
-                    <td>1000</td>
-                </tr>
+                        {purchases.map((purchase, i) => (
+                            <TableElement 
+                                key = {i}
+                                i = {i.toString()}
+                                name = {purchase.purName}
+                                desc = {purchase.purDesc} 
+                                price = {purchase.price}
+                                handleDelete={handlePurDelete}
+                            />
+                        ))}
+                        
+                
                 </tbody>
             </table>
         </div>
