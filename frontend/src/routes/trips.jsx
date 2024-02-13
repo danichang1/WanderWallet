@@ -64,18 +64,30 @@ const Trips = () => {
                 <button className="btn btn-secondary mx-10" onClick={handleModalOpen}>Add Trip</button>
             </div>
             
-            <ul className="grid grid-cols-3 gap-5">
-                {allTrips.map((trip, i) => (
-                    <TripCard 
-                        key = {i.toString()}
-                        i = {i.toString()}
-                        name = {trip.tripName}
-                        currency = {trip.currency}
-                        categories = {trip.categories}
-                    
-                    />
-                ))}
-            </ul>
+            {allTrips.length > 0 && (
+                <ul className="grid grid-cols-3 gap-5">
+                    {allTrips.map((trip, i) => (
+                        <TripCard 
+                            key = {i.toString()}
+                            i = {i.toString()}
+                            name = {trip.tripName}
+                            currency = {trip.currency}
+                            categories = {trip.categories}
+                        
+                        />
+                    ))}
+                </ul>
+            )}
+            {allTrips.length == 0 && (
+                <div className="hero mt-20">
+                    <div className="hero-content text-center">
+                        <div className="max-w-md">
+                            <h1 className="text-xl">Click "Add Trip" to create your first trip!</h1>
+                        </div>
+                    </div>
+                </div>
+            )}
+                
 
             <button className="btn btn-circle btn-secondary text-2xl fixed bottom-10 right-10" onClick={handleHelpOpen}>
                 <p>?</p>

@@ -60,18 +60,31 @@ const TripInfo = () => {
                 <button className="btn btn-secondary mx-10" onClick={handleModalOpen}>Add Category</button>
             </div> 
 
-            <ul className="grid">
-                {tripCategories.map((category, i) => (
-                    <CategoryCard
-                        key = {i}
-                        index = {i.toString()}
-                        tripNum = {tripNum}
-                        catName = {category.catName}
-                        currency = {tripInfo.currency}
-                        purchases = {category.purchases}
-                    />
-                ))}     
-            </ul>
+            {tripCategories.length > 0 && (
+                <ul className="grid">
+                    {tripCategories.map((category, i) => (
+                        <CategoryCard
+                            key = {i}
+                            index = {i.toString()}
+                            tripNum = {tripNum}
+                            catName = {category.catName}
+                            currency = {tripInfo.currency}
+                            purchases = {category.purchases}
+                        />
+                    ))}     
+                </ul>
+            )}
+
+            {tripCategories.length == 0 && (
+                <div className="hero mt-20">
+                    <div className="hero-content text-center">
+                        <div className="max-w-md">
+                            <h1 className="text-xl">Click "Add Category" to create your first category!</h1>
+                        </div>
+                    </div>
+                </div>
+            )}
+                
 
             <button className="btn btn-circle btn-secondary text-2xl fixed bottom-10 right-10" onClick={handleHelpOpen}>
                 <p>?</p>

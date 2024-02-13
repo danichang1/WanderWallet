@@ -7,7 +7,6 @@ const CategoryCard = ({index, tripNum, catName, currency, purchases}) => {
     const [purName, setPurName] = useState("")
     const [purDesc, setPurDesc] = useState("")
     const [purPrice, setPurPrice] = useState("")
-    const [allPurchases, setAllPurchases] = useState(purchases)
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
@@ -78,12 +77,17 @@ const CategoryCard = ({index, tripNum, catName, currency, purchases}) => {
                
                 <div className="card-body">
                     
-                    <Table 
-                        currency = {currency} 
-                        purchases = {allPurchases} 
-                        tripNum = {tripNum} 
-                        catNum = {index}
-                    />
+                    {purchases.length > 0 && (
+                        <Table 
+                            currency = {currency} 
+                            purchases = {purchases} 
+                            tripNum = {tripNum} 
+                            catNum = {index}
+                        />
+                    )}
+                    {purchases.length == 0 && (
+                        <h1 className="text-m">Click "Add Purchase" to create your first purchase!</h1>
+                    )}
                     
                 </div>
                 <div className="pb-5">
