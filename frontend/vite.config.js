@@ -41,6 +41,10 @@ export default defineConfig({
       "/deletePurchase": {
         target: "http://localhost:3001",
         changeOrigin: true,
+      },
+      "/convert": {
+        target: "http://localhost:4001",
+        changeOrigin: true,
       }
     }
   }

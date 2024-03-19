@@ -10,7 +10,7 @@ const Trips = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isHelpOpen, setIsHelpOpen] = useState(false);
 
-
+    //populates page from database
     useEffect(() => {
         axios.get("/getTrips")
         .then((res) => {
@@ -21,33 +21,39 @@ const Trips = () => {
         })
     }, [])
 
+    //opens trip modal
     const handleModalOpen = () => {
         setIsModalOpen(true);
     };
     
+    //closes trip modal, clears data
     const handleModalClose = () => {
         setTripName("");
         setTripCurrency("Pick one");
         setIsModalOpen(false);
     };
 
+    //opens help panel
     const handleHelpOpen = () => {
         setIsHelpOpen(true);
     };
 
+    //closes help panel
     const handleHelpClose = () => {
         setIsHelpOpen(false);
     }
 
-
+    //stores new trip name when user is entering into modal
     const handleTripName = (e) => {
         setTripName(e.target.value);
     };
 
+    //stores new trip currency when user is entering into modal
     const handleTripCurrency = (e) => {
         setTripCurrency(e.target.value);
     }
 
+    //adds new trip to database
     const handleTripModalConfirm = () => {
         const newTrip = {
             tripName: tripName,
@@ -61,9 +67,11 @@ const Trips = () => {
         <>
             <div className="pb-5 flex">
                 <h1 className="text-3xl font-semibold">My Trips</h1>
+                {/* add trip button, opens modal */}
                 <button className="btn btn-secondary mx-10" onClick={handleModalOpen}>Add Trip</button>
             </div>
             
+            {/* trip cards */}
             {allTrips.length > 0 && (
                 <ul className="grid grid-cols-3 gap-5">
                     {allTrips.map((trip, i) => (
@@ -78,6 +86,8 @@ const Trips = () => {
                     ))}
                 </ul>
             )}
+
+            {/* message telling user to make first trip */}
             {allTrips.length == 0 && (
                 <div className="hero mt-20">
                     <div className="hero-content text-center">
@@ -88,15 +98,18 @@ const Trips = () => {
                 </div>
             )}
                 
-
-            <button className="btn btn-circle btn-secondary text-2xl fixed bottom-10 right-10" onClick={handleHelpOpen}>
+            {/* help button */}
+            <button className="btn btn-circle btn-secondary text-2xl fixed bottom-10 right-10" 
+            onClick={handleHelpOpen}>
                 <p>?</p>
             </button>
 
+            {/* help panel */}
             {isHelpOpen && (
                 <div className="card w-96 bg-base-100 shadow-xl fixed bottom-10 right-10">
                     <div className="card-body">
                         <div className="card-actions justify-end">
+                            {/* button to close panel */}
                             <button className="btn btn-square btn-sm" onClick={handleHelpClose}>
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
                             </button>
@@ -107,13 +120,14 @@ const Trips = () => {
                 </div>
             )}
                 
-
+            {/* new trip modal */}
             {isModalOpen && (
                 <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-[1]">
                     <div className="modal-backdrop absolute top-0 left-0 right-0 bottom-0 bg-black opacity-50"></div>
                         <div className="modal-box">
                         <h3 className="font-bold text-lg">Enter Trip Info</h3>
 
+                        {/* enter name field */}
                         <label className="form-control w-full max-w-xs">
                             <div className="label mt-4">
                                 <span className="label-text">Name</span>
@@ -128,7 +142,7 @@ const Trips = () => {
                             />
                         </label>
 
-
+                        {/* choose currency field */}
                         <label className="form-control w-full max-w-xs">
                             <div className="label mt-4">
                                 <span className="label-text">Currency</span>
@@ -152,10 +166,12 @@ const Trips = () => {
                             </select>
                         </label>
 
+                        {/* buttons to close modal */}
                         <div className="modal-action">
                             <button className="btn mx-8 btn" onClick = {handleModalClose}>Close</button>
                             
-                            <button className="btn btn-secondary" onClick = {() => {handleTripModalConfirm(); handleModalClose();}}>Confirm</button>
+                            <button className="btn btn-secondary" onClick = {() => 
+                                {handleTripModalConfirm(); handleModalClose();}}>Confirm</button>
                         </div>
                     </div>
                 </div>

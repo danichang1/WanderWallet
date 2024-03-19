@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-//const database = require("./database.json")
 const fs = require("fs");
 
 const data = fs.readFileSync("database.json")
@@ -8,6 +7,7 @@ const database = JSON.parse(data);
 
 app.use(express.json());
 
+//returns JSON object storing all trips
 app.get("/getTrips", async (req, res) => {
     try{
         res.status(200).json(database.trips)
@@ -17,9 +17,9 @@ app.get("/getTrips", async (req, res) => {
     }
 });
 
+//returns JSON object storing info for one specific trip
 app.get("/getTripInfo/:tripNum", async (req, res) => {
     try{
-        
         const tripNum = req.params.tripNum;
         res.json(database.trips[tripNum])
     } catch (error) {
@@ -28,7 +28,7 @@ app.get("/getTripInfo/:tripNum", async (req, res) => {
     }
 });
 
-
+//returns JSON object storing all categories for a trip
 app.get("/getTripCategories/:tripNum", async (req, res) => {
     try{
         const tripNum = req.params.tripNum;
@@ -39,6 +39,7 @@ app.get("/getTripCategories/:tripNum", async (req, res) => {
     }
 })
 
+//adds a new trip to database file 
 app.post("/addTrip", async (req, res) => {
     try{
         const newTrip = {
@@ -55,6 +56,7 @@ app.post("/addTrip", async (req, res) => {
     }
 });
 
+//adds a new category for a trip to database file
 app.post("/addCategory/:tripNum", async (req, res) => {
     try{
         const newCat = {
@@ -70,6 +72,7 @@ app.post("/addCategory/:tripNum", async (req, res) => {
     }
 });
 
+//adds a new purchase within a trip's category to database file
 app.post("/addPurchase/:tripNum/:catNum", async (req, res) => {
     try{
         const newPurchase = {
@@ -86,6 +89,7 @@ app.post("/addPurchase/:tripNum/:catNum", async (req, res) => {
     }
 });
 
+//deletes trip from database file
 app.delete("/deleteTrip", async (req, res) => {
     try{
         const num = parseInt(req.query.tripNum);
@@ -98,6 +102,7 @@ app.delete("/deleteTrip", async (req, res) => {
     }
 });
 
+//delete's trip's category from database file
 app.delete("/deleteCategory", async (req, res) => {
     try{
         const tripNum = parseInt(req.query.tripNum);
@@ -111,14 +116,12 @@ app.delete("/deleteCategory", async (req, res) => {
     }
 });
 
+//deletes purchase from a trip's category from database file
 app.delete("/deletePurchase", async (req, res) => {
     try{
         const tripNum = parseInt(req.query.tripNum);
         const catNum = parseInt(req.query.catNum);
         const purNum = parseInt(req.query.purNum);
-        console.log(tripNum)
-        console.log(catNum)
-        console.log(purNum)
         database.trips[tripNum].categories[catNum].purchases.splice(purNum, 1);
         fs.writeFileSync("database.json", JSON.stringify(database));
         res.status(200).send("Deleted Purchase");
@@ -128,6 +131,7 @@ app.delete("/deletePurchase", async (req, res) => {
     }
 });
 
+//runs server
 app.listen(3001, () => {
     console.log("Server is listening on port 3001");
 });

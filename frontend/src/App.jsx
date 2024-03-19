@@ -7,12 +7,22 @@ import './index.css'
 const App = () => {
   return (
     <BrowserRouter>
+
       <Routes>
+
+        {/* all pages use layout */}
         <Route path = "/" element = {<Layout />}>
+
+          {/* home route is trips page */}
           <Route index element = {<Trips/>} />
+
+          {/* trip info page */}
           <Route path = ":tripNum" element = {<TripInfo/>} />
+          
         </Route>
+
       </Routes>
+
     </BrowserRouter>
   );
 }
